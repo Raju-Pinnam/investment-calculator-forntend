@@ -9,11 +9,12 @@ function App() {
     expectedReturn: 6,
     duration: 10,
   });
+  const inputIsValid = userInput.duration >= 1;
   function handleChanges(inputIdentifier, newValue) {
     setUserInput((previousUserInput) => {
       return {
         ...previousUserInput,
-        [inputIdentifier]: newValue,
+        [inputIdentifier]: +newValue,
       };
     });
   }
@@ -24,7 +25,8 @@ function App() {
         userInput={userInput}
         handleChanges={handleChanges}
       />
-      <Results input={userInput} />
+      {!inputIsValid && <p>Please Enter Valid Input</p>}
+      {inputIsValid && <Results input={userInput} />}
     </>
   );
 }
